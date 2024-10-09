@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import renato.portfolio.jogos.controller.dto.CreateJogoDTO;
+import renato.portfolio.jogos.controller.dto.UpdateJogoDTO;
 
 @Entity
 public class Jogo {
@@ -17,10 +18,10 @@ public class Jogo {
 	private Long id;
 	private String nome;
 	private String plataforma;
-	private int horasJogadas;
+	private Integer horasJogadas;
 	private LocalDate dataCompra;
 	private LocalDate ultimaVezJogado;
-	private boolean finalizado;
+	private Boolean finalizado;
 	private String nota;
 	private String desenvolvedor;
 	private String genero;
@@ -158,6 +159,19 @@ public class Jogo {
 		return "Jogo [id=" + id + ", nome=" + nome + ", plataforma=" + plataforma + ", horasJogadas=" + horasJogadas
 				+ ", dataCompra=" + dataCompra + ", ultimaVezJogado=" + ultimaVezJogado + ", finalizado=" + finalizado
 				+ ", nota=" + nota + ", desenvolvedor=" + desenvolvedor + ", genero=" + genero + "]";
+	}
+
+	public void atualizar(UpdateJogoDTO jogoAtualizado) {
+		if(jogoAtualizado.nome() != null) this.nome = jogoAtualizado.nome();
+		if(jogoAtualizado.plataforma() != null) this.plataforma = jogoAtualizado.plataforma();
+		if(jogoAtualizado.horasJogadas() != null) this.horasJogadas = jogoAtualizado.horasJogadas();
+		if(jogoAtualizado.dataCompra() != null) this.dataCompra = jogoAtualizado.dataCompra();
+		if(jogoAtualizado.ultimaVezJogado() != null) this.ultimaVezJogado = jogoAtualizado.ultimaVezJogado();
+		if(jogoAtualizado.finalizado() != null) this.finalizado = jogoAtualizado.finalizado();
+		if(jogoAtualizado.nota() != null) this.nota = jogoAtualizado.nota();
+		if(jogoAtualizado.desenvolvedor() != null) this.desenvolvedor = jogoAtualizado.desenvolvedor();
+		if(jogoAtualizado.genero() != null) this.genero = jogoAtualizado.genero();
+		
 	}
 
 }

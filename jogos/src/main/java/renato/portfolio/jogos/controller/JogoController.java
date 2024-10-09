@@ -28,7 +28,7 @@ import renato.portfolio.jogos.domain.Jogo;
 import renato.portfolio.jogos.repository.JogoRepository;
 
 @RestController
-@RequestMapping("/api/jogos")
+@RequestMapping("/jogos")
 public class JogoController {
 
     @Autowired
@@ -38,7 +38,7 @@ public class JogoController {
     public ResponseEntity<Jogo> criarJogo(@RequestBody @Valid CreateJogoDTO CreateJogoDTO, UriComponentsBuilder uriComponentsBuilder) {
         Jogo novoJogo = new Jogo (CreateJogoDTO);
     	jogoRepository.save(novoJogo);
-    	URI uri = uriComponentsBuilder.path("/board/{id}").buildAndExpand(novoJogo.getId()).toUri();
+    	URI uri = uriComponentsBuilder.path("/jogos/{id}").buildAndExpand(novoJogo.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 

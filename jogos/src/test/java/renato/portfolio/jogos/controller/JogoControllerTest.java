@@ -35,27 +35,54 @@ public class JogoControllerTest {
 
 	@Autowired
 	private ObjectMapper objectMapper;
-	
+
 	@Test
 	public void testPostJogo() throws JsonProcessingException, Exception {
-		 //Arrange
-		CreateJogoDTO createJogoDTO = new CreateJogoDTO("Teste", "Nintendo Teste", 40, LocalDate.now().minusDays(7), LocalDate.now(), false, "NOta boa", "Ação", "Aventura");
-		
-		//Act & Assert
-		mockMvc.perform(MockMvcRequestBuilders.post("/jogos")
-				.contentType(MediaType.APPLICATION_JSON)
+		// Arrange
+		CreateJogoDTO createJogoDTO = new CreateJogoDTO("Teste", "Nintendo Teste", 40, LocalDate.now().minusDays(7),
+				LocalDate.now(), false, "NOta boa", "Ação", "Aventura");
+
+		// Act & Assert
+		mockMvc.perform(MockMvcRequestBuilders.post("/jogos").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(createJogoDTO)))
 				.andExpect(MockMvcResultMatchers.status().isCreated())
 				.andExpect(MockMvcResultMatchers.header().string("Location", "http://localhost/jogos/1"));
 	}
-	
+
 	@Test
-	public void testPostJogoCamposInvalidos() {
-		CreateJogoDTO createJogoDTONullName = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
-		CreateJogoDTO createJogoDTONullPlataforma = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
-		CreateJogoDTO createJogoDTOHorasJogadasMenorQZero = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
-		CreateJogoDTO createJogoDTONullDataCompra = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
-		CreateJogoDTO createJogoDTONullDesenvolvedor = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
+	public void testPostJogoCamposInvalidos() throws JsonProcessingException, Exception {
+		// Arrange
+		CreateJogoDTO createJogoDTONullName = new CreateJogoDTOBuilder().nome(null).build();
+		CreateJogoDTO createJogoDTONullPlataforma = new CreateJogoDTOBuilder().plataforma(null).build();
+		CreateJogoDTO createJogoDTOHorasJogadasMenorQZero = new CreateJogoDTOBuilder().horasJogadas(-1).build();
+		CreateJogoDTO createJogoDTONullDataCompra = new CreateJogoDTOBuilder().dataCompra(null).build();
+		CreateJogoDTO createJogoDTONullDesenvolvedor = new CreateJogoDTOBuilder().desenvolvedor(null).build();
+
+		// Act & Assert
+		mockMvc.perform(MockMvcRequestBuilders.post("/jogos").contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(createJogoDTONullName)))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
+		// Act & Assert
+		mockMvc.perform(MockMvcRequestBuilders.post("/jogos").contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(createJogoDTONullPlataforma)))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
+		// Act & Assert
+		mockMvc.perform(MockMvcRequestBuilders.post("/jogos").contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(createJogoDTOHorasJogadasMenorQZero)))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
+		// Act & Assert
+		mockMvc.perform(MockMvcRequestBuilders.post("/jogos").contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(createJogoDTONullDataCompra)))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
+		// Act & Assert
+		mockMvc.perform(MockMvcRequestBuilders.post("/jogos").contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(createJogoDTONullDesenvolvedor)))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
+
+//		CreateJogoDTO createJogoDTONullPlataforma = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
+//		CreateJogoDTO createJogoDTOHorasJogadasMenorQZero = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
+//		CreateJogoDTO createJogoDTONullDataCompra = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
+//		CreateJogoDTO createJogoDTONullDesenvolvedor = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
 		// as declarações acima dentro deste método serão substituídas pelo builder
 	}
 }

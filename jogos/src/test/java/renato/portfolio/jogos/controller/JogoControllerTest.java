@@ -1,8 +1,5 @@
 package renato.portfolio.jogos.controller;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
@@ -13,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,16 +48,17 @@ public class JogoControllerTest {
 	@Test
 	public void testPostJogoCamposInvalidos() throws JsonProcessingException, Exception {
 		// Arrange
-		CreateJogoDTO createJogoDTONullName = new CreateJogoDTOBuilder().nome(null).build();
-		CreateJogoDTO createJogoDTONullPlataforma = new CreateJogoDTOBuilder().plataforma(null).build();
-		CreateJogoDTO createJogoDTOHorasJogadasMenorQZero = new CreateJogoDTOBuilder().horasJogadas(-1).build();
-		CreateJogoDTO createJogoDTONullDataCompra = new CreateJogoDTOBuilder().dataCompra(null).build();
-		CreateJogoDTO createJogoDTONullDesenvolvedor = new CreateJogoDTOBuilder().desenvolvedor(null).build();
+		CreateJogoDTO createJogoDTONullName = new CreateJogoDTOBuilder().withNomeNull().build();
 
+		CreateJogoDTO createJogoDTONullPlataforma = new CreateJogoDTOBuilder().withPlataforma(null).build();
+		CreateJogoDTO createJogoDTOHorasJogadasMenorQZero = new CreateJogoDTOBuilder().withHorasJogadas(-1).build();
+		CreateJogoDTO createJogoDTONullDataCompra = new CreateJogoDTOBuilder().withDataCompra(null).build();
+		CreateJogoDTO createJogoDTONullDesenvolvedor = new CreateJogoDTOBuilder().withDesenvolvedor(null).build();
 		// Act & Assert
 		mockMvc.perform(MockMvcRequestBuilders.post("/jogos").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(createJogoDTONullName)))
 				.andExpect(MockMvcResultMatchers.status().isBadRequest());
+
 		// Act & Assert
 		mockMvc.perform(MockMvcRequestBuilders.post("/jogos").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(createJogoDTONullPlataforma)))
@@ -83,6 +80,5 @@ public class JogoControllerTest {
 //		CreateJogoDTO createJogoDTOHorasJogadasMenorQZero = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
 //		CreateJogoDTO createJogoDTONullDataCompra = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
 //		CreateJogoDTO createJogoDTONullDesenvolvedor = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
-		// as declarações acima dentro deste método serão substituídas pelo builder
 	}
 }

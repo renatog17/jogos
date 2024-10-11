@@ -51,6 +51,11 @@ public class JogoControllerTest {
 	
 	@Test
 	public void testPostJogoCamposInvalidos() {
-		//pausa para respirar
+		CreateJogoDTO createJogoDTONullName = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
+		CreateJogoDTO createJogoDTONullPlataforma = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
+		CreateJogoDTO createJogoDTOHorasJogadasMenorQZero = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
+		CreateJogoDTO createJogoDTONullDataCompra = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
+		CreateJogoDTO createJogoDTONullDesenvolvedor = new CreateJogoDTO(null, null, 0, null, null, false, null, null, null);
+		// as declarações acima dentro deste método serão substituídas pelo builder
 	}
 }

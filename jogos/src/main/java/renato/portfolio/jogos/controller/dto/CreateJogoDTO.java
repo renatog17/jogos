@@ -12,11 +12,11 @@ public record CreateJogoDTO(
 	    @NotBlank(message = "A plataforma não pode ser vazia.") 
 		String plataforma,
 	    @Positive(message = "Horas jogadas devem ser um número positivo.") 
-		int horasJogadas,
+		Integer horasJogadas,
 	    @NotNull(message = "A data de compra não pode ser nula.") 
 		LocalDate dataCompra,
 	    LocalDate ultimaVezJogado,
-	    boolean finalizado,
+	    Boolean finalizado,
 	    String nota,
 	    @NotBlank(message = "O nome do desenvolvedor não pode ser vazio.") 
 		String desenvolvedor,

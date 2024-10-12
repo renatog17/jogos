@@ -37,6 +37,10 @@ public class CreateJogoDTOBuilder {
 		this.nome = null;
 		return this;
 	}
+	public CreateJogoDTOBuilder withNomeEmpty() {
+		this.nome = "";
+		return this;
+	}
 
 	public CreateJogoDTOBuilder withPlataforma(String plataforma) {
 		this.plataforma = plataforma;
@@ -45,6 +49,10 @@ public class CreateJogoDTOBuilder {
 
 	public CreateJogoDTOBuilder withPlataformaNull() {
 		this.plataforma = null;
+		return this;
+	}
+	public CreateJogoDTOBuilder withPlataformaEmpty() {
+		this.plataforma = "";
 		return this;
 	}
 
@@ -97,6 +105,10 @@ public class CreateJogoDTOBuilder {
 		this.nota = null;
 		return this;
 	}
+	public CreateJogoDTOBuilder withNotaEmpty() {
+		this.nota = "";
+		return this;
+	}
 
 	public CreateJogoDTOBuilder withDesenvolvedor(String desenvolvedor) {
 		this.desenvolvedor = desenvolvedor;
@@ -104,6 +116,10 @@ public class CreateJogoDTOBuilder {
 	}
 
 	public CreateJogoDTOBuilder withDesenvolvedorNull() {
+		this.desenvolvedor = null;
+		return this;
+	}
+	public CreateJogoDTOBuilder withDesenvolvedorEmpty() {
 		this.desenvolvedor = null;
 		return this;
 	}
@@ -115,6 +131,10 @@ public class CreateJogoDTOBuilder {
 
 	public CreateJogoDTOBuilder withGeneroNull() {
 		this.genero = null;
+		return this;
+	}
+	public CreateJogoDTOBuilder withGeneroEmpty() {
+		this.genero = "";
 		return this;
 	}
 
